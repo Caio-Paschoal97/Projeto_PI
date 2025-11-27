@@ -1,0 +1,30 @@
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+
+export default function Welcome() {
+  const router = useRouter()
+  const { user } = router.query
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+    if (typeof user === 'string') setUsername(user)
+  }, [user])
+
+  if (!username) return null
+
+  return (
+    <>
+    <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <h1>Bem‑vindo, {username}!</h1>
+      <p>Login realizado com sucesso.</p>
+    </div>
+
+    <Link href="/sementes">
+    <button style={{ marginTop: '16px' }}>
+      Gerenciar sementes
+    </button>
+  </Link>
+  </>
+  )
+}
